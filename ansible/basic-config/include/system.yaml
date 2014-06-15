@@ -1,0 +1,19 @@
+- name: set timezone
+  sudo: True
+  shell: echo "Europe/Amsterdam\n" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+  
+- name: disable ipv6
+  sudo: True
+  shell: echo "net.ipv6.conf.all.disable_ipv6 = 1\n" > /etc/sysctl.d/ipv6.conf && /sbin/sysctl -p creates=/etc/sysctl.d/ipv6.conf
+  
+- name: configure ssh
+  sudo: True
+  shell: update-rc.d ssh enable && invoke-rc.d ssh start
+  
+- name: enable systemd
+  sudo: True
+  shell: sed -i 's/$/ init=\/bin\/systemd/' /boot/cmdline.txt
+  
+- name: put motd in place
+  sudo: True
+  copy: src=files/etc/motd dest=/etc/motd mode=644 group=root owner=root

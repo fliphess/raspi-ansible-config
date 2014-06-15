@@ -1,0 +1,12 @@
+Host github.com
+        User git
+        Hostname github.com
+        PreferredAuthentications publickey
+        Port 22
+
+Host *
+	Port 22
+	ServerAliveInterval 30
+	ServerAliveCountMax 120
+        SendEnv LANG LC_*
+

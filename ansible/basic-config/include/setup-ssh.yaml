@@ -1,0 +1,20 @@
+- name: Create ssh config dir for root
+  file: state=directory path=/root/.ssh mode=0700 owner=root group=root
+  sudo: True
+  
+- name: set authorized_keys file for root
+  sudo: True
+  copy: src=root/.ssh/authorized_keys dest=/root/.ssh/authorized_keys mode=600 group=root owner=root
+  
+- name: Create ssh config dir for pi
+  file: state=directory path=/home/pi/.ssh mode=0700 owner=pi group=pi
+  
+- name: set authorized_keys file  for pi
+  copy: src=root/ssh/authorized_keys dest=/home/pi/.ssh/authorized_keys mode=600 group=pi owner=pi
+
+- name: put sshd config in place 
+  copy: src=etc/ssh/sshd_config dest=/etc/ssh/sshd_config mode=644 group=root owner=root
+
+- name: reload ssh daemon 
+  sudo: True
+  shell: /etc/init.d/ssh reload

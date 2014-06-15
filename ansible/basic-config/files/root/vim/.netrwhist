@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/root/flip/techrobot'
+let g:netrw_dirhist_2='/root/flip'
+let g:netrw_dirhist_3='/home/users/c4/yenomftp/test.yenom.nl'
+let g:netrw_dirhist_4='/root/flip'
+let g:netrw_dirhist_5='/root/hans'
+let g:netrw_dirhist_6='/usr/sbin'

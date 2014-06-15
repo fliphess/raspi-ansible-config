@@ -1,0 +1,16 @@
+" INFO this file is puppeted
+syntax on
+set backspace=2
+set background=dark
+filetype plugin on
+set foldmethod=marker
+set title
+
+if has("autocmd")
+	filetype indent on
+endif
+nmap <C-F6> :%!perltidy<CR>
+
+"do not enter replace mode on insert; warning: make sure the line below ends with > not a whitespace
+imap <INS> <NoP>
+
