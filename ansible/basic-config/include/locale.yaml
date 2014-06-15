@@ -1,0 +1,15 @@
+- name: set timezone
+  sudo: True
+  shell: echo "Europe/Amsterdam\n" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+
+- name: activate new timezone
+  sudo: True
+  command: /usr/sbin/dpkg-reconfigure -f noninteractive tzdata
+
+- name: update locale
+  sudo: True
+  copy: content="en_US.UTF-8 UTF-8" dest=/etc/locale.gen
+
+- name: config locale
+  sudo: True
+  shell: /usr/sbin/update-locale

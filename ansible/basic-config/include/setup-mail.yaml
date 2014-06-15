@@ -1,0 +1,3 @@
+- name: forward root mail to error@byte.nl
+  sudo: True
+  copy: content="flip@fliphess.com" dest=/root/.forward owner=root group=root

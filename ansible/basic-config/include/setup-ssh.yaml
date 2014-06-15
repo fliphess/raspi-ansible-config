@@ -4,7 +4,7 @@
   
 - name: set authorized_keys file for root
   sudo: True
-  copy: src=root/.ssh/authorized_keys dest=/root/.ssh/authorized_keys mode=600 group=root owner=root
+  copy: src=root/ssh/authorized_keys dest=/root/.ssh/authorized_keys mode=600 group=root owner=root
   
 - name: Create ssh config dir for pi
   file: state=directory path=/home/pi/.ssh mode=0700 owner=pi group=pi
