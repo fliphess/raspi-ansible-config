@@ -1,0 +1,29 @@
+- name: install required packages 
+  apt: pkg={{ item }} state=installed update_cache=yes 
+  with_items: 
+  - lighttpd
+  - spawn-fcgi
+
+- name: create /etc/lighttpd dir 
+  sudo: True
+  file: path=/etc/lighttpd state=directory
+
+- name: create bin dir in root
+  sudo: True
+  file: path=/root/bin state=directory
+
+- name: copy gencert script
+  sudo: True
+  copy: src=files/root/bin/gencert.sh dest=/root/bin/gencert.sh mode=700 owner=root group=root
+
+- name: create cert in /etc/lighttpd
+  sudo: True
+  shell: /root/bin/gencert.sh /etc/lighttpd/lighttpd.pem
+
+- name: put config file in place
+  sudo: True
+  copy: src=files/etc/lighttpd/lighttpd.conf dest=/etc/lighttpd/lighttpd.conf
+
+- name: start lighttpd daemon 
+  sudo: True
+  shell: /etc/init.d/lighttpd restart
