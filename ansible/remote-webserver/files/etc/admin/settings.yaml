@@ -1,0 +1,55 @@
+### 
+## Command matrix settings file
+###
+
+admins:
+  - admin
+  - api
+
+commands:
+    01_script_one:
+      name: First Script
+      link: /home/pi/scripts/plop.pl
+      star: True
+   
+    02_script_two:
+      name: First Script
+      link: /home/pi/scripts/plop.pl
+      star: True
+      
+    03_script_three:
+      name: First Script
+      link: /home/pi/scripts/plop.pl
+      star: True
+      
+    04_script_four:
+      name: First Script
+      link: /home/pi/scripts/plop.pl
+      star: True
+      
+    05_script_five:
+      name: First Script
+      link: /home/pi/scripts/plop.pl
+      star: True
+      
+links:
+    06_link_to_something_six:
+      name: First Script
+      link: /home/pi/link_to_somethings/plop.pl
+      
+    07_link_to_something_seven:
+      name: First Script
+      link: /home/pi/link_to_somethings/plop.pl
+      
+    08_link_to_something_eight:
+      name: First Script
+      link: /home/pi/link_to_somethings/plop.pl
+      
+    09_link_to_something_nine:
+      name: First Script
+      link: /home/pi/link_to_somethings/plop.pl
+      
+    10_link_to_something_ten:
+      name: First Script
+      link: /home/pi/link_to_somethings/plop.pl
+      

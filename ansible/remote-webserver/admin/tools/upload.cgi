@@ -16,10 +16,6 @@ File name: <input name="file_1" type="file"><br>
 </html>"""
 
 def print_html_form ():
-    """This prints out the html form. Note that the action is set to
-      the name of the script which makes this is a self-posting form.
-      In other words, this cgi both displays a form and processes it.
-    """
     print "content-type: text/html\n"
     print HTML_TEMPLATE % {'SCRIPT_NAME':os.environ['SCRIPT_NAME']}
 
