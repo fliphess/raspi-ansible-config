@@ -8,48 +8,53 @@ admins:
 
 commands:
     01_script_one:
-      name: First Script
-      link: /home/pi/scripts/plop.pl
-      star: True
+      name: Process list
+      command: ps -ef
+      title: Run ps -ef
+      id: DSTnsrhstrh543TWQ
    
     02_script_two:
-      name: First Script
-      link: /home/pi/scripts/plop.pl
-      star: True
+      name: Show kernel version
+      command: uname -a
+      title: Run uname -a
+      id: ASRferGdfzf34waergerstg
       
     03_script_three:
-      name: First Script
-      link: /home/pi/scripts/plop.pl
-      star: True
+      name: Get logged in users
+      command: w
+      title: Run w
+      id: ESRGae4RGser5g43
       
     04_script_four:
-      name: First Script
-      link: /home/pi/scripts/plop.pl
-      star: True
+      name: Print kernel logbuffer
+      command: sudo dmesg
+      title: Run dmesg
+      id: ERGe5rg4e5rgrthr56ea
       
     05_script_five:
-      name: First Script
-      link: /home/pi/scripts/plop.pl
-      star: True
-      
+      name: Get directory listing
+      command: find . 
+      title: Run find .
+      id: EGer5g5rthsx
+
 links:
     06_link_to_something_six:
-      name: First Script
-      link: /home/pi/link_to_somethings/plop.pl
+      name: First Link Script
+      link: https://example.com/link_to_somethings/plop.pl
       
     07_link_to_something_seven:
-      name: First Script
-      link: /home/pi/link_to_somethings/plop.pl
+      name: Second Link
+      link: https://example.com/link_to_somethings/plop.pl
       
     08_link_to_something_eight:
-      name: First Script
-      link: /home/pi/link_to_somethings/plop.pl
+      name: Third Link
+      link: https://example.com/link_to_somethings/plop.pl
       
     09_link_to_something_nine:
-      name: First Script
-      link: /home/pi/link_to_somethings/plop.pl
+      name: Fourth linkn
+      link: https://example.com/link_to_somethings/plop.pl
       
     10_link_to_something_ten:
-      name: First Script
-      link: /home/pi/link_to_somethings/plop.pl
+      name: Fifth link
+      link: https://example.com/link_to_somethings/plop.pl
       
