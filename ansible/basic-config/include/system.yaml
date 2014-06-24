@@ -1,6 +1,14 @@
 - name: disable ipv6
   sudo: True
-  shell: echo "net.ipv6.conf.all.disable_ipv6 = 1\n" > /etc/sysctl.d/ipv6.conf && /sbin/sysctl -p creates=/etc/sysctl.d/ipv6.conf
+  shell: echo "net.ipv6.conf.all.disable_ipv6 = 1" > /etc/sysctl.d/ipv6.conf && /sbin/sysctl -p creates=/etc/sysctl.d/ipv6.conf
+
+- name: turn off swap
+  sudo: True
+  shell: echo "vm.swappiness = 0" > /etc/sysctl.d/swap.conf && /sbin/sysctl -p creates=/etc/sysctl.d/swap.conf
+
+- name: bootscripts
+  sudo: True
+  copy: files/etc/rc.local dest=/etc/rc.local owner=root group=root
   
 - name: configure ssh
   sudo: True
