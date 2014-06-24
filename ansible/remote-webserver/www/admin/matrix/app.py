@@ -33,8 +33,10 @@ def get_command_content(settings, script, page='control'):
     body = ''
     if page == 'system':
         element = settings.system[script]
+        returnlink = '/admin/reset.cgi'
     else:
         element = settings.commands[script]
+        returnlink = '/admin/matrix.cgi'
 
     output, exitcode = run_command(element['command'])
     data = {'output': output, 'command': script, 'exitcode': exitcode}
@@ -49,6 +51,6 @@ def get_command_content(settings, script, page='control'):
         
     codeblock_content = cgi.escape(output_block, False)
     body += input_page % {'content': codefield % { 'codeblock': codeblock_content}}
-    body += return_footer % {'id': element['id']}
+    body += return_footer % {'id': element['id'], 'returnlink': returnlink}
     return body
 

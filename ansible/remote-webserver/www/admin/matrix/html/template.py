@@ -71,7 +71,7 @@ return_footer = """
       <form method="post" action="/admin/input.cgi">
         <input type="hidden" name="action" value="%(id)s" />
         <button type="submit" class="btn btn-danger">Run Again</button>
-        <a href="/admin/matrix.cgi" class="btn btn-large btn-info"><i class="icon-home icon-white"></i>Home</a>
+        <a href="%(returnlink)s" class="btn btn-large btn-info"><i class="icon-home icon-white"></i>Home</a>
       </form>
     </div>
   </div>
