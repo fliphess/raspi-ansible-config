@@ -14,3 +14,4 @@
 - name: install required packages 
   apt: pkg={{ item }} state=installed update_cache=yes 
   with_items: 
+  - python-yaml

@@ -18,7 +18,7 @@ modal = """
         </div>
 
         <div class="modal-footer">
-          <form method="post" action="/admin/input.cgi">
+          <form method="post" action="%(postscript)s">
           <input type="hidden" name="action" value="%(identifier)s" />
           <button type="submit" class="btn btn-default">Continue</button>
         </form>

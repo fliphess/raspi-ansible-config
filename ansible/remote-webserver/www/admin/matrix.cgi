@@ -1,12 +1,9 @@
 #!/usr/bin/python
-import cgi
 import cgitb 
-from string import Template
 
 from matrix.settings import Settings
-from matrix.html.header import header
 from matrix.html.modal import modal
-from matrix.html.page import page
+from matrix.html.control import indexpage
 from matrix.html.sidelinks import sidelinks
 from matrix.html.template import template
 
@@ -20,6 +17,7 @@ def mainfield(settings):
 	       'name': settings.commands[command]['name'],
 	       'command': settings.commands[command]['command'],
 	       'identifier': settings.commands[command]['id'],
+	       'postscript': '/admin/input.cgi',
 	       'tag': command,
         }
         body += modal % data
@@ -35,7 +33,7 @@ def sidefield(settings):
 
 def content(settings):
     data = { 'mainfield': mainfield(settings), 'sidefield': sidefield(settings)}
-    return page % data
+    return indexpage % data
 
 
 cgitb.enable()

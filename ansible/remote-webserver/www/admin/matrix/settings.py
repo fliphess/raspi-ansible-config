@@ -11,6 +11,7 @@ class Settings():
     def __init__(self, filename):
         struct = read_settings_file(filename)
         self.commands = struct.get('commands')
+	self.system = struct.get('system')
         self.links = struct.get('links')
         self.admins = struct.get('admins')
 

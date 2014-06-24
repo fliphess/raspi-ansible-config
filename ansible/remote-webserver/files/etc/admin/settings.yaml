@@ -6,6 +6,37 @@ admins:
   - admin
   - api
 
+system:
+  01_reboot:
+      name: Reboot Pi
+      command: reboot
+      title: Run reboot 
+      id: DSTnaregsrsrhstrh543TWQ
+
+  02_shutdown:
+      name: Shutdown Pi
+      command: shutdown -h now
+      title: Run shutdown
+      id: DSTnsrhstrw4ygerathfh543TWQ
+
+  03_reset_hdmi:
+      name: Reset HDMI
+      command: /opt/vc/bin/tvservice -o && /opt/vc/bin/tvservice -p
+      title: Reset HDMI
+      id: DSTnsrhstrh543TWQ3q5yq3gergvzd
+
+  04_turn_off_hdmi:
+      name: Turn Off HDMI
+      command: /opt/vc/bin/tvservice -o
+      title: Turn Off HDMI
+      id: DSTnsrhstrh543TWQ3q5yq3gergvzdesrgaer
+
+  05_turn_on_hdmi:
+      name: Turn On HDMI
+      command: /opt/vc/bin/tvservice -p
+      title: Turn On HDMI
+      id: DSTnsrhstrh543TWQ3q5yq3gergvzdertg
+
 commands:
     01_script_one:
       name: Process list
