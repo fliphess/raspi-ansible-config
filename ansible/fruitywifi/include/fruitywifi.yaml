@@ -1,0 +1,79 @@
+- name: install required packages 
+  apt: pkg={{ item }} state=installed update_cache=yes 
+  with_items: 
+  - gettext 
+  - make 
+  - intltool 
+  - build-essential 
+  - automake 
+  - autoconf 
+  - uuid 
+  - uuid-dev 
+  - dos2unix 
+  - curl
+  - gcc-4.7
+  - g++-4.7
+  - dnsmasq
+  - hostapd
+  - libssl-dev
+
+- name: Remove packages
+  apt: pkg={{ item }} state=purged update_cache=yes 
+  with_items: 
+  - ifplugd
+
+- name: Turn on ssh at boot time 
+  sudo: True
+  shell: update-rc.d ssh defaults
+
+- name: Turn on ntp at boot time
+  sudo: True
+  shell: update-rc.d ntp defaults
+
+- name: Setup GCC 4.7
+  sudo: True
+  shell: update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.7
+
+- name: Get fruity wifi repository and move into place
+  sudo: False
+  shell: cd /tmp && git clone https://github.com/fliphess/FruityWifi.git && mv /tmp/FruityWifi/FruityWifi /usr/share
+
+- name: Create symlink to www
+  sudo: True
+  file: src=/usr/share/FruityWifi/www dest=/var/www/FruityWifi state=link owner=root group=root
+
+- name: create symlink to logs
+  sudo: True
+  file: src=/usr/share/FruityWifi/logs dest=/var/www/FruityWifi/logs state=link owner=root group=root
+
+- name: Create symlink to /usr/share/FruityWifi/www.site
+  sudo: True
+  file: src=/usr/share/FruityWifi/www.site dest=/var/www/site state=link 
+
+- name: Create temp dir  
+  sudo: True
+  file: path=/var/www/tmp state=directory owner=pi group=pi mode=777
+
+- name: Set permissions to /usr/share/FruityWifi/squid.inject/poison.pl 
+  sudo: True
+  file: path=/usr/share/FruityWifi/squid.inject/poison.pl mode=755 
+
+- name: Set permissions to /usr/share/FruityWifi/www.site/data.txt
+  sudo: True
+  file: path=/usr/share/FruityWifi/www.site/data.txt mode=777 
+
+- name: Set perms to /usr/share/FruityWifi/www.site/inject/data.txt
+  sudo: True
+  file: path=/usr/share/FruityWifi/www.site/inject/data.txt mode=777
+
+- name: Recursive chown /usr/share/FruityWifi/www.site
+  sudo: True
+  file: path=/usr/share/FruityWifi/www.site owner=pi group=pi recurse=yes
+
+- name: Build Danger script
+  sudo: True
+  shell: cd /usr/share/FruityWifi/bin/ && gcc danger.c -o danger
+
+- name: Perms Danger script 
+  sudo: True
+  file: /usr/share/FruityWifi/bin/danger mode=4755
