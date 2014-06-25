@@ -3,10 +3,17 @@
   with_items: 
   - lighttpd
   - spawn-fcgi
+  - php5-fpm 
+  - php5
+  - php5-cgi
 
 - name: create /etc/lighttpd dir 
   sudo: True
   file: path=/etc/lighttpd state=directory
+
+- name: start /etc/init.d/php5-fpm
+  sudo: True
+  shell: /etc/init.d/php5-fpm start
 
 - name: create bin dir in root
   sudo: True
@@ -23,6 +30,10 @@
 - name: create cert in /etc/lighttpd
   sudo: True
   shell: /root/bin/gencert.sh /etc/lighttpd/lighttpd.pem
+
+- name: copy php directory
+  sudo: True
+  copy: src=files/etc/php5 dest=/etc/php5 owner=root group=root
 
 - name: put config file in place
   sudo: True
