@@ -1,5 +1,4 @@
 ---
 -   hosts: all
-
     tasks:
       - include: include/metasploit.yaml
