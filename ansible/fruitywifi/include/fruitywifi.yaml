@@ -18,7 +18,7 @@
   - libssl-dev
 
 - name: Remove packages
-  apt: pkg={{ item }} state=purged update_cache=yes 
+  apt: pkg={{ item }} state=absent update_cache=yes 
   with_items: 
   - ifplugd
 
@@ -30,13 +30,25 @@
   sudo: True
   shell: update-rc.d ntp defaults
 
+- name: Put aircrack ng installer script in place
+  sudo: True
+  copy: src=files/script/install-aircrack-ng.sh dest=/root/bin/install-aircrack-ng.sh mode=600 group=pi owner=pi
+
+- name: Install aircrack NG
+  sudo: True
+  shell: /root/bin/install-aircrack-ng.sh
+
 - name: Setup GCC 4.7
   sudo: True
   shell: update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.7
 
 - name: Get fruity wifi repository and move into place
   sudo: False
-  shell: cd /tmp && git clone https://github.com/fliphess/FruityWifi.git && mv /tmp/FruityWifi/FruityWifi /usr/share
+  git: repo=https://github.com/fliphess/FruityWifi.git dest=/tmp/FruityWifi update=yes accept_hostkey=yes
+
+- name: Move fruity in place
+  sudo: True
+  shell: rm -rf /usr/share/FruityWifi && sudo mv -f /tmp/FruityWifi/FruityWifi /usr/share
 
 - name: Create symlink to www
   sudo: True
@@ -72,8 +84,12 @@
 
 - name: Build Danger script
   sudo: True
-  shell: cd /usr/share/FruityWifi/bin/ && gcc danger.c -o danger
+  shell: cd /usr/share/FruityWifi/bin/ && sudo gcc danger.c -o danger
 
 - name: Perms Danger script 
   sudo: True
-  file: /usr/share/FruityWifi/bin/danger mode=4755
+  file: path=/usr/share/FruityWifi/bin/danger mode=4755 
+
+- name: update fruity wifi modules
+  sudo: True
+  shell: /tmp/FruityWifi/install-modules.py       

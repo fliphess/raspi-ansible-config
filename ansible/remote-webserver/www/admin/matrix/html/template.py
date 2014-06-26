@@ -24,7 +24,7 @@ template = """
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="/admin/matrix.cgi">Control Panel</a></li>
-              <li><a href="/admin/wifi.cgi">Wifi Panel</a></li>
+              <li><a href="/FruityWifi">Fruity WIFI</a></li>
               <li><a href="/admin/reset.cgi">Pi Reset</a></li>
               </li>
             </ul>

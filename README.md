@@ -42,6 +42,6 @@ git clone git@github.com:fliphess/raspi-ansible-config.git
 
   From the raspberry Git Repository:
   - Run the installer:
-   ./runme <IP Address of the Raspberry Pi>
+   ./runme <IP Address of the Raspberry Pi> <module to install>
 
 - Get coffee and wait

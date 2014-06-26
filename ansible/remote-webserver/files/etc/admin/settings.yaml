@@ -70,22 +70,22 @@ commands:
 
 links:
     06_link_to_something_six:
-      name: First Link Script
-      link: https://example.com/link_to_somethings/plop.pl
+      name: Flip's Personal Webpage
+      link: https://fliphess.com
       
     07_link_to_something_seven:
-      name: Second Link
-      link: https://example.com/link_to_somethings/plop.pl
+      name: Flip's github
+      link: https://github.com/fliphess
       
     08_link_to_something_eight:
-      name: Third Link
-      link: https://example.com/link_to_somethings/plop.pl
+      name: My Photo Page
+      link: https://www.facebook.com/FlipHessPhotography
       
     09_link_to_something_nine:
-      name: Fourth linkn
-      link: https://example.com/link_to_somethings/plop.pl
+      name: The raspberry website
+      link: http://www.raspberrypi.org/
       
     10_link_to_something_ten:
-      name: Fifth link
-      link: https://example.com/link_to_somethings/plop.pl
+      name: The Raspian website
+      link: http://www.raspbian.org/
       
