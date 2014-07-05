@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 HOST="$1"
 MOD="$2"
 PORT=22

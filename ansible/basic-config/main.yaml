@@ -2,9 +2,9 @@
 -   hosts: all
 
     tasks:
-      - include: include/setup-apt.yaml
       - include: include/system.yaml
+      - include: include/setup-apt.yaml
       - include: include/setup-ssh.yaml
+      - include: include/setup-mail.yaml
       - include: include/vim.yaml
-      - include: include/mail.yaml
       - include: include/locale.yaml

@@ -48,6 +48,17 @@
   - /var/cache/lighttpd
   - /run/lighttpd
 
+- name: set +x for cgi scripts
+  sudo: True
+  file: path={{ item }} mode=0755
+  with_items:
+  - /var/www/admin/matrix.cgi
+  - /var/www/admin/input.cgi    
+  - /var/www/admin/reset.cgi
+  - /var/www/admin/system.cgi
+  - /var/www/admin/tools/env.cgi
+  - /var/www/admin/tools/upload.cgi
+
 - name: copy auth file
   sudo: True
   copy: src=files/etc/lighttpd/lighttpd.user dest=/etc/lighttpd/lighttpd.user mode=640 owner=root group=pi

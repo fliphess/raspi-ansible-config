@@ -8,7 +8,7 @@
 
 - name: bootscripts
   sudo: True
-  copy: files/etc/rc.local dest=/etc/rc.local owner=root group=root
+  copy: src=files/etc/rc.local dest=/etc/rc.local owner=root group=root
   
 - name: configure ssh
   sudo: True
@@ -24,17 +24,3 @@
 
 - name: Remove sudo group rights
   action: lineinfile dest=/etc/sudoers regexp="^%sudo" state=absent
-
-- name: Disallow root SSH access
-  action: lineinfile dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
-  notify: Restart sshd
-
-- name: Disallow password authentication
-  action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
-  notify: Restart sshd
-
-handlers:
-  - name: Restart sshd
-    action: service name=sshd state=restarted
-
-

@@ -32,7 +32,7 @@
 
 - name: Put aircrack ng installer script in place
   sudo: True
-  copy: src=files/script/install-aircrack-ng.sh dest=/root/bin/install-aircrack-ng.sh mode=600 group=pi owner=pi
+  copy: src=files/scripts/install-aircrack-ng.sh dest=/root/bin/install-aircrack-ng.sh mode=700 group=pi owner=pi
 
 - name: Install aircrack NG
   sudo: True
