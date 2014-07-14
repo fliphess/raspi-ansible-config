@@ -1,0 +1,55 @@
+- name: install required packages 
+  sudo: True
+  apt: pkg={{ item }} state=installed update_cache=yes 
+  with_items: 
+  - rpi-update
+  - libjpeg62
+  - motion
+
+- name: copy /etc/modules in place
+  sudo: True
+  copy: src=files/etc/modules dest=/etc/modules mode=644 owner=root group=pi
+
+- name: copy modprobe blacklist in place
+  sudo: True
+  copy: src=files/etc/modprobe.d/raspi-blacklist.conf dest=/etc/modprobe.d/raspi-blacklist.conf mode=644 owner=root group=pi
+
+- name: run rpi-update - update firmware
+  sudo: True
+  shell: rpi-update
+
+- name: copy binary in place 
+  sudo: True
+  copy: src=files/motion/motion-mmal dest=/usr/local/bin/motion-mmal mode=755 owner=pi group=pi
+
+- name: copy config in place 
+  sudo: True
+  copy: src=files/motion/motion-mmalcam.conf dest=/etc/motion/motion-mmalcam.conf mode=740 owner=pi group=pi
+
+- name: copy init script in place
+  sudo: True
+  copy: src=files/etc/init.d/motion-mmal dest=/etc/init.d/motion-mmal mode=755 owner=root group=root
+
+- name: start daemon create symlinks
+  sudo: True
+  shell: update-rc.d motion-mmal defaults
+
+- name: start daemon on startup
+  sudo: True
+  shell: update-rc.d motion-mmal enable
+
+- name: stop motion daemon on startup
+  sudo: True
+  shell: update-rc.d motion disable
+
+- name: put /etc/default/motion-mmal in place
+  sudo: True
+  copy: src=files/etc/default/motion-mmal dest=/etc/default/motion-mmal mode=755 owner=root group=root
+
+- name: create storage directory 
+  sudo: True
+  file: path=/home/pi/video state=directory mode=0750 owner=pi group=pi
+
+- name: reboot raspberry pi
+  sudo: True
+  shell: reboot
