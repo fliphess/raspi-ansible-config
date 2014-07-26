@@ -1,0 +1,15 @@
+- name: start-motion-mmal
+  sudo: True
+  service: name=motion-mmal state=started
+
+- name: start-motion-mmal-at-boot
+  sudo: True
+  shell: update-rc.d motion-mmal defaults
+
+- name: stop-motion-daemon
+  sudo: True
+  service: name=motion state=stopped
+
+- name: stop-motion-daemon-at-boot
+  sudo: True
+  shell: update-rc.d motion disable

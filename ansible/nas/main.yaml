@@ -1,9 +1,0 @@
----
--   hosts: all
-
-    tasks:
-      - include: include/nas.yaml
-      - include: include/samba.yaml
-      - include: include/dnsmasq.yaml
-      - include: include/swat.yaml
-      - include: include/reboot.yaml

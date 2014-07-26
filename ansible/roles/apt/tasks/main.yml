@@ -1,0 +1,7 @@
+---
+- name: Update package cache 
+  shell: apt-get update
+
+- name: get python-apt
+  shell: DEBIAN_FRONTEND=noninteractive apt-get -y install python-apt; touch /root/.python-apt-done
+    creates=/root/.python-apt-done

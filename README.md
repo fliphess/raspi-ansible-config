@@ -15,7 +15,11 @@ cp examples/hosts /etc/ansible/
   
 ```
 git clone git@github.com:fliphess/raspi-ansible-config.git
+
 ```
+
+# Edit ansible.cfg
+vim ./ansible.cfg
 
 # Next: 
 

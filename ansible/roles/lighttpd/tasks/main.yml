@@ -1,0 +1,46 @@
+- name: install required packages 
+  apt: pkg={{ item }} state=installed update_cache=yes 
+  with_items: 
+  - lighttpd
+  - spawn-fcgi
+
+- name: create /etc/lighttpd dir 
+  sudo: True
+  file: path=/etc/lighttpd state=directory
+
+- name: copy gencert script
+  sudo: True
+  copy: src=root/bin/gencert.sh dest=/root/bin/gencert.sh mode=700 owner=root group=root
+
+- name: copy create-admin script
+  sudo: True
+  copy: src=root/bin/create-md5sum.pl dest=/root/bin/create-md5sum.pl mode=700 owner=root group=root
+
+- name: create cert in /etc/lighttpd
+  sudo: True
+  shell: /root/bin/gencert.sh /etc/lighttpd/lighttpd.pem
+
+- name: put lighttpd config file in place
+  sudo: True
+  copy: src=etc/lighttpd/lighttpd.conf dest=/etc/lighttpd/lighttpd.conf
+  notify:
+    - start-lighttpd
+
+- name: remove directories 
+  file: path={{ item }} state=absent
+  with_items:
+  - conf-available
+  - conf-enabled
+
+- name: set permissions to pi
+  sudo: True
+  file: path={{ item }} owner=pi group=pi recurse=yes state=directory
+  with_items: 
+  - /var/www
+  - /var/log/lighttpd
+  - /var/cache/lighttpd
+  - /run/lighttpd
+
+- name: copy auth file
+  sudo: True
+  copy: src=etc/lighttpd/lighttpd.user dest=/etc/lighttpd/lighttpd.user mode=640 owner=root group=pi

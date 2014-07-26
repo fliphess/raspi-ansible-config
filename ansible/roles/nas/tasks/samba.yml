@@ -1,0 +1,19 @@
+# 
+# Samba
+#
+
+- name: copy samba config in place
+  sudo: True
+  copy: src=etc/samba/smb.conf dest=/etc/samba/smb.conf mode=644 owner=root group=root
+
+- name: copy samba dhcp conf in place  
+  sudo: True
+  copy: src=etc/samba/dhcp.conf dest=/etc/samba/dhcp.conf mode=644 owner=root group=root
+
+- name: copy samba defaults in place 
+  sudo: True
+  copy: src=etc/default/samba dest=/etc/default/samba mode=755 owner=root group=root
+          
+- name: start samba on startup
+  sudo: True
+  shell: update-rc.d samba enable

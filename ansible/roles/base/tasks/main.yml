@@ -1,0 +1,7 @@
+---
+- include: packages.yml
+- include: system.yml
+- include: setup-ssh.yml
+- include: setup-mail.yml
+- include: vim.yml
+- include: locale.yml

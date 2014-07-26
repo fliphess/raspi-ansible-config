@@ -1,0 +1,5 @@
+---
+dependencies:
+  - { role: apt }
+  - { role: base }
+  - { role: lighttpd }

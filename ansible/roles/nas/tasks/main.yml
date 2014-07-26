@@ -1,0 +1,6 @@
+---
+- include: nas.yml
+- include: samba.yml
+- include: dnsmasq.yml
+- include: swat.yml
+- include: reboot.yml

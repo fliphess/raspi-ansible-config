@@ -1,6 +1,0 @@
----
--   hosts: all
-
-    tasks:
-      - include: include/lighttpd.yaml
-      - include: include/admin-panel.yaml

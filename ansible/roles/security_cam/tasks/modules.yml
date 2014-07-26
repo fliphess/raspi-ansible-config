@@ -1,0 +1,11 @@
+- name: copy /etc/modules in place
+  sudo: True
+  copy: src=etc/modules dest=/etc/modules mode=644 owner=root group=pi
+
+- name: copy modprobe blacklist in place
+  sudo: True
+  copy: src=etc/modprobe.d/raspi-blacklist.conf dest=/etc/modprobe.d/raspi-blacklist.conf mode=644 owner=root group=pi
+
+- name: run rpi-update - update firmware
+  sudo: True
+  shell: rpi-update

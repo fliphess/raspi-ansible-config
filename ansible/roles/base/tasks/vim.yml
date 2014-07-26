@@ -1,0 +1,13 @@
+- name: put vimrc in place 
+  sudo: True
+  copy: src=root/vimrc dest=/root/.vimrc
+
+- name: put vim dir in place
+  copy: src=root/vim dest=/root/.vim
+
+- name: put vimrc in place 
+  sudo: True
+  copy: src=root/vimrc dest=/home/pi/.vimrc
+
+- name: put vim dir in place
+  copy: src=root/vim dest=/home/pi/.vim

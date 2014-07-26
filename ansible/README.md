@@ -32,4 +32,4 @@ Includes:
  * SWAT - Samba Web Administration Tool
  * dnsmasq - DNS, DHCP, TFTP, PXEBoot 
 
-### To setup a pxe boot, see https://github.com/fliphess/debian-netboot-with-bnx2
+### To setup a pxe boot, see https://github.com/fliphess/auto-netboot-builder

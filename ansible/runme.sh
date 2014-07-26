@@ -1,6 +1,6 @@
 #!/bin/bash 
 HOST="$1"
-MOD="$2"
+RECIPE="$2"
 PORT=22
 
 function hostup() { 
@@ -12,9 +12,15 @@ function hostup() {
   return 0
 }
 
+# check for script_path
+if [ "$0" != "./runme.sh" ] ; then 
+	echo "Please run this script as \"./$( basename $0 $@)\"."
+	exit 1
+fi
+
 # Check for arguments
-if [ -z $HOST ] || [ -z $MOD ] ; then 
-	echo "Usage: $0 <host> <module>"
+if [ -z $HOST ] || [ -z $RECIPE ] ; then 
+	echo "Usage: $0 <host> <recipe_file>"
 	exit 0;
 fi
 
@@ -23,11 +29,10 @@ if ( ! hostup "$HOST" ); then
 	exit 1;
 fi
 
-if [ ! -f "$MOD/main.yaml" ]; then 
-	echo "Playbook $MOD/main.yaml not found!"
+if [ ! -f "$RECIPE" ]; then 
+	echo "Playbook $RECIPE directory not found!"
 	exit 1;
 fi
 
-echo "Running playbook $MOD/main.yaml on $HOST"
-ansible-playbook -u pi -i "$HOST", "$MOD/main.yaml" -vv -c ssh -s
-
+echo "Running playbook $RECIPE on $HOST"
+ansible-playbook -u pi -i "$HOST", "$RECIPE" -vv -c ssh -s

@@ -1,0 +1,10 @@
+- name: install required packages
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+  - php5-fpm
+  - php5
+  - php5-cgi
+ 
+- name: copy php directory
+  sudo: True
+  copy: src=php5 dest=/etc/php5 owner=root group=root

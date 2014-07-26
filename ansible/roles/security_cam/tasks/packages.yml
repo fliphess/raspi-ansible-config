@@ -1,0 +1,7 @@
+- name: install required packages
+  sudo: True
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+  - rpi-update
+  - libjpeg62
+  - motion

@@ -1,0 +1,41 @@
+- name: disable ipv6
+  sudo: True
+  shell: echo "net.ipv6.conf.all.disable_ipv6 = 1" > /etc/sysctl.d/ipv6.conf && /sbin/sysctl -p creates=/etc/sysctl.d/ipv6.conf
+
+- name: turn off swap
+  sudo: True
+  shell: echo "vm.swappiness = 0" > /etc/sysctl.d/swap.conf && /sbin/sysctl -p creates=/etc/sysctl.d/swap.conf
+
+- name: update firmware
+  sudo: True
+  shell: rpi-update
+
+- name: put interfaces file in place
+  sudo: True
+  copy: src=etc/network/interfaces dest=/etc/network/interfaces owner=root group=root
+
+- name: bootscripts
+  sudo: True
+  copy: src=etc/rc.local dest=/etc/rc.local owner=root group=root
+  
+- name: configure ssh
+  sudo: True
+  shell: update-rc.d ssh enable && invoke-rc.d ssh start
+  
+- name: enable systemd
+  sudo: True
+  shell: sed -i 's/$/ init=\/bin\/systemd/' /boot/cmdline.txt
+  
+- name: put motd in place
+  sudo: True
+  copy: src=etc/motd dest=/etc/motd mode=644 group=root owner=root
+
+- name: create bin dir in root
+  sudo: True
+  file: path=/root/bin state=directory
+
+- name: Remove sudo group rights
+  action: lineinfile dest=/etc/sudoers regexp="^%sudo" state=absent
+
+- name: also make sure ssh-agent works via sudo
+  lineinfile: dest=/etc/sudoers state=present regexp='^Defaults env_keep\+\=SSH_AUTH_SOCK' line='Defaults env_keep+=SSH_AUTH_SOCK'

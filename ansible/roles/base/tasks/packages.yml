@@ -1,0 +1,32 @@
+---
+- name: install required packages
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+  - lockfile-progs
+  - systemd
+  - git
+  - vim
+  - telnet
+  - unzip
+  - screen
+  - python-pip
+  - python-dev
+  - python-paramiko
+  - python-yaml
+  - virtualenvwrapper
+  - iw
+  - sl
+  - htop
+  - tshark
+  - subversion
+  - firmware-realtek
+  - libnl-dev
+  - libssl-dev
+  - hostapd
+  - nfs-common
+  - postfix
+
+- name: remove unwanted packages
+  apt: pkg={{ item }} state=absent update_cache=yes
+  with_items:
+  - lightdm
