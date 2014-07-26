@@ -22,7 +22,6 @@
   - firmware-realtek
   - libnl-dev
   - libssl-dev
-  - hostapd
   - nfs-common
   - postfix
 

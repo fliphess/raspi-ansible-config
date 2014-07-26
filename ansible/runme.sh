@@ -1,6 +1,7 @@
 #!/bin/bash 
 HOST="$1"
 RECIPE="$2"
+FLAGS="$3"
 PORT=22
 
 function hostup() { 
@@ -35,4 +36,4 @@ if [ ! -f "$RECIPE" ]; then
 fi
 
 echo "Running playbook $RECIPE on $HOST"
-ansible-playbook -u pi -i "$HOST", "$RECIPE" -vv -c ssh -s
+ansible-playbook -u pi -i "$HOST", "$RECIPE" -vv -c ssh -s $FLAGS

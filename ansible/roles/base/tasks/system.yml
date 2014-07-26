@@ -43,6 +43,6 @@
 - name: Turn on ssh at boot time
   sudo: True
   shell: update-rc.d {{ item }} defaults
-  with_item:
+  with_items:
   - ssh
   - ntp
