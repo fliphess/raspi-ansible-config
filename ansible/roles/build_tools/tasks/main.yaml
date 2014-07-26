@@ -1,0 +1,20 @@
+---
+- name: install required packages
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+  - autoconf
+  - build-essential
+  - libreadline-dev
+  - libssl-dev
+  - libyaml-dev
+  - ruby1.9.3
+  - ruby-bcrypt
+  - ruby-dev
+  - ruby-pg
+  - subversion
+  - zlib1g-dev
+  - libreadline5
+  - automake
+  - make
+  - gcc-4.7
+  - g++-4.7

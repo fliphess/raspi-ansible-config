@@ -2,15 +2,11 @@
 - name: install required packages 
   apt: pkg={{ item }} state=installed update_cache=yes 
   with_items: 
-  - autoconf 
   - bridge-utils 
-  - build-essential 
   - libreadline-dev 
   - libpcap-ruby
-  - libssl-dev 
   - libpq5 
   - libpq-dev 
-  - libreadline5 
   - libsqlite3-dev 
   - libpcap-dev 
   - libxml2-dev 
@@ -23,14 +19,8 @@
   - openjdk-7-jre 
   - pgadmin3 
   - postgresql 
-  - ruby1.9.3
-  - ruby-bcrypt
-  - ruby-dev 
-  - ruby-pg 
-  - subversion 
   - tcpdump
   - vncviewer 
-  - zlib1g-dev 
  
 - name: get metasploit repo
   sudo: True

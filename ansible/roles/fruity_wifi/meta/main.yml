@@ -4,4 +4,5 @@ dependencies:
   - { role: base }
   - { role: lighttpd }
   - { role: php5 }
+  - { role: build_tools }
   - { role: admin_panel }

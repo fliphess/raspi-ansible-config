@@ -2,32 +2,18 @@
   apt: pkg={{ item }} state=installed update_cache=yes 
   with_items: 
   - gettext 
-  - make 
   - intltool 
-  - build-essential 
-  - automake 
-  - autoconf 
   - uuid 
   - uuid-dev 
   - dos2unix 
   - curl
-  - gcc-4.7
-  - g++-4.7
   - dnsmasq
   - hostapd
-  - libssl-dev
 
 - name: Remove packages
   apt: pkg={{ item }} state=absent update_cache=yes 
   with_items: 
   - ifplugd
-
-- name: Turn on ssh at boot time 
-  sudo: True
-  shell: update-rc.d {{ item }} defaults
-  with_item:
-  - ssh 
-  - ntp
 
 - name: Put aircrack ng installer script in place
   sudo: True

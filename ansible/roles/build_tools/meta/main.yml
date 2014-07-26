@@ -1,5 +1,4 @@
 ---
-dependencies: 
+dependencies:
   - { role: apt }
   - { role: base }
-  - { role: build_tools }

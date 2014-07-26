@@ -39,3 +39,10 @@
 
 - name: also make sure ssh-agent works via sudo
   lineinfile: dest=/etc/sudoers state=present regexp='^Defaults env_keep\+\=SSH_AUTH_SOCK' line='Defaults env_keep+=SSH_AUTH_SOCK'
+
+- name: Turn on ssh at boot time
+  sudo: True
+  shell: update-rc.d {{ item }} defaults
+  with_item:
+  - ssh
+  - ntp
