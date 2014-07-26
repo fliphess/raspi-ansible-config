@@ -1,0 +1,3 @@
+DNSMASQ_OPTS="--conf-file=/etc/dnsmasq.conf"
+ENABLED=1
+CONFIG_DIR=/etc/dnsmasq.d,.dpkg-dist,.dpkg-old,.dpkg-new

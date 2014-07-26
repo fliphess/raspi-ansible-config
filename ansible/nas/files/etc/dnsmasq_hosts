@@ -1,0 +1,5 @@
+172.17.17.1	dns.lan		dns
+172.17.17.1	router.lan	router
+172.17.17.1	nas.lan		nas
+172.17.17.1	dhcp.lan	dhcp
+172.17.17.1	pinas.lan	pinas

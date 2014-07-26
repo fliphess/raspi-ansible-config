@@ -6,6 +6,10 @@
   sudo: True
   shell: echo "vm.swappiness = 0" > /etc/sysctl.d/swap.conf && /sbin/sysctl -p creates=/etc/sysctl.d/swap.conf
 
+- name: update firmware
+  sudo: True
+  shell: rpi-update
+
 - name: put interfaces file in place
   sudo: True
   copy: src=files/etc/network/interfaces dest=/etc/network/interfaces owner=root group=root

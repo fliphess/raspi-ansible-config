@@ -1,5 +1,4 @@
 use Getopt::Long;
-use Byte::Toolkit::ConsoleLogging;
 
 ###
 # Get Options
