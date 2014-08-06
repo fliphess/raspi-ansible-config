@@ -1,0 +1,24 @@
+---
+- name: set boot options in cmdline.txt
+  sudo: true
+  replace: dest=/boot/cmdline.txt regexp='^dwc_otg.lpm_enable=0 (.*)$' replace='dwc_otg.fiq_fix_enable=1 dwc_otg.fiq_split_enable=0 dwc_otg.lpm_enable=0 smsc95xx.turbo_mode=N init=/bin/systemd \1' 
+
+- name: put config.txt in place 
+  sudo: true
+  copy: src=config.txt dest=/boot/config.txt owner=root group=root
+
+- name: Make server make better use of ram instead of disk
+  sudo: true
+  lineinfile: dest=/etc/default/rcS line="RAMRUN=yes"
+
+- name: Make server use ram instead of disk
+  sudo: true
+  lineinfile: dest=/etc/default/rcS line="RAMLOCK=yes"
+
+- name: disable ipv6
+  sudo: True
+  shell: echo "net.ipv6.conf.all.disable_ipv6 = 1" > /etc/sysctl.d/ipv6.conf && /sbin/sysctl -p creates=/etc/sysctl.d/ipv6.conf
+
+- name: turn off swap
+  sudo: True
+  shell: echo "vm.swappiness = 0" > /etc/sysctl.d/swap.conf && /sbin/sysctl -p creates=/etc/sysctl.d/swap.conf

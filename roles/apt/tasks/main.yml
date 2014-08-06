@@ -1,7 +1,13 @@
 ---
 - name: Update package cache 
+  sudo: True
   shell: apt-get update
 
 - name: get python-apt
+  sudo: True
   shell: DEBIAN_FRONTEND=noninteractive apt-get -y install python-apt; touch /root/.python-apt-done
     creates=/root/.python-apt-done
+
+- name: dont install recommends 
+  sudo: True
+  shell: echo 'APT::Install-Recommends "0";nAPT::Install-Suggests "0";' > /etc/apt/apt.conf

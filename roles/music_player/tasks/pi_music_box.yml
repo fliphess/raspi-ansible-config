@@ -1,0 +1,87 @@
+---
+- name: get pi music box 
+  sudo: true
+  git: repo=git@github.com:woutervanwijk/Pi-MusicBox.git dest=/tmp/musicbox update=yes accept_hostkey=yes force=yes
+
+- name: sync time
+  sudo: true
+  shell: service ntp stop; ntpdate -u ntp.ubuntu.com ; service ntp start
+
+- name: create config boot dir
+  sudo: true
+  file: path=/boot/config state=directory owner=root group=root
+
+- name: move config file 
+  sudo: true
+  command: cp /tmp/musicbox/filechanges/boot/config/settings.ini /boot/config/
+
+- name: put mopidy config in place
+  sudo: true
+  command: bash -c "cp -rv /tmp/musicbox/filechanges/etc/mopidy/* /etc/mopidy/"
+
+- name: move opt files
+  sudo: true
+  command: bash -c "cp -rv /tmp/musicbox/filechanges/opt/* /opt"
+
+- name: move rc.local 
+  sudo: true
+  command: cp /tmp/musicbox/filechanges/etc/rc.local /etc
+
+- name: move etc modules
+  sudo: true
+  command: cp /tmp/musicbox/filechanges/etc/modules /etc
+
+- name: copy avahi config
+  sudo: true
+  command: bash -c "cp -rv /tmp/musicbox/filechanges/etc/avahi/services/* /etc/avahi/services/"
+
+- name: copy samba config
+  sudo: true
+  command: cp /tmp/musicbox/filechanges/etc/samba/smb.conf /etc/samba
+
+- name: copy libaio config in place 
+  sudo: true
+  command: cp /tmp/musicbox/filechanges/etc/libao.conf /etc
+
+- name: install mopidy key
+  sudo: true
+  shell: wget -q -O - http://apt.mopidy.com/mopidy.gpg | sudo apt-key add -
+
+- name: set mopidy sources
+  sudo: true
+  shell: wget -q -O /etc/apt/sources.list.d/mopidy.list http://apt.mopidy.com/mopidy.list
+
+- name: run apt-get update
+  sudo: true
+  shell: apt-get update
+
+- name: install packages
+  sudo: True
+  apt: pkg={{ item }} state=installed update_cache=yes 
+  with_items: 
+    - logrotate
+    - alsa-utils
+    - python-cherrypy3
+    - python-ws4py
+    - python-spotify
+    - gstreamer0.10-alsa
+    - gstreamer0.10-fluendo-mp3
+    - gstreamer0.10-tools
+    - samba
+    - dos2unix
+    - avahi-utils
+    - alsa-base
+    - python-pylast
+    - cifs-utils
+    - avahi-autoipd
+    - libnss-mdns
+    - ntpdate
+    - ca-certificates
+    - ncmpcpp
+    - alsa-firmware-loaders
+    - firmware-linux
+    - firmware-linux-nonfree
+    - firmware-realtek
+    - linux-wlan-ng-firmware
+    - alsa-firmware-loaders
+    - mpd

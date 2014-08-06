@@ -1,5 +1,6 @@
 ---
 dependencies: 
+  - { role: boot_options }
   - { role: apt }
   - { role: base }
   - { role: build_tools }

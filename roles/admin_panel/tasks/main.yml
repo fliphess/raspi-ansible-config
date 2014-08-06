@@ -2,11 +2,8 @@
   sudo: True
   file: path=/etc/admin state=directory
 
-- name: create www dir 
-  file: path=/var/www state=directory owner=pi group=pi mode=755
-
 - name: clone repo to www dir
-  git: repo=git@github.com:fliphess/raspi-admin-panel.git dest=/var/www/ update=yes accept_hostkey=yes force=yes
+  git: repo=git@github.com:fliphess/raspi-admin-panel.git dest=/srv/www/ update=yes accept_hostkey=yes force=yes
 
 - name: put config file in place
   sudo: True
@@ -21,9 +18,9 @@
   sudo: True
   file: path={{ item }} mode=0755
   with_items:
-    - /var/www/admin/index.cgi
-    - /var/www/admin/input.cgi    
-    - /var/www/admin/reset.cgi
-    - /var/www/admin/system.cgi
-    - /var/www/admin/tools/env.cgi
-    - /var/www/admin/tools/upload.cgi
+    - /srv/www/admin/index.cgi
+    - /srv/www/admin/input.cgi    
+    - /srv/www/admin/reset.cgi
+    - /srv/www/admin/system.cgi
+    - /srv/www/admin/tools/env.cgi
+    - /srv/www/admin/tools/upload.cgi

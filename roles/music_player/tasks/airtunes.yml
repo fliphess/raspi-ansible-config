@@ -1,0 +1,47 @@
+---
+- name: put perl libs install script in place 
+  sudo: True
+  copy: src=install-perl-spd.sh dest=/root/bin/install-perl-spd.sh mode=755 owner=root group=root
+
+- name: put build shairport install script in place
+  sudo: True
+  copy: src=install-shairport.sh dest=/root/bin/install-shairport.sh mode=755 owner=root group=root
+
+- name: Install pips
+  sudo: True
+  pip: name={{ item }} 
+  with_items:
+    - gmusicapi
+    - mopidy 
+    - mopidy-spotify 
+    - mopidy-scrobbler 
+    - mopidy-soundcloud 
+    - mopidy-dirble 
+    - mopidy-gmusic 
+    - mopidy-subsonic
+
+- name: install packages
+  sudo: True
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+  - build-essential
+  - libssl-dev
+  - libcrypt-openssl-rsa-perl
+  - libao-dev
+  - libio-socket-inet6-perl
+  - libwww-perl
+  - avahi-utils
+  - pkg-config
+  - chkconfig
+  - libssl-dev
+  - libavahi-client-dev
+  - libasound2-dev 
+  - pcregrep
+
+- name: Install perl libs 
+  sudo: True
+  shell: /root/bin/install-perl-spd.sh
+
+- name: Install shairport
+  sudo: True
+  shell: /root/bin/install-shairport.sh

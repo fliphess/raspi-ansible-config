@@ -37,19 +37,19 @@
 
 - name: Create symlink to www
   sudo: True
-  file: src=/usr/share/FruityWifi/www dest=/var/www/FruityWifi state=link owner=root group=root
+  file: src=/usr/share/FruityWifi/www dest=/srv/www/FruityWifi state=link owner=root group=root
 
 - name: create symlink to logs
   sudo: True
-  file: src=/usr/share/FruityWifi/logs dest=/var/www/FruityWifi/logs state=link owner=root group=root
+  file: src=/usr/share/FruityWifi/logs dest=/srv/www/FruityWifi/logs state=link owner=root group=root
 
 - name: Create symlink to /usr/share/FruityWifi/www.site
   sudo: True
-  file: src=/usr/share/FruityWifi/www.site dest=/var/www/site state=link 
+  file: src=/usr/share/FruityWifi/www.site dest=/srv/www/site state=link 
 
 - name: Create temp dir  
   sudo: True
-  file: path=/var/www/tmp state=directory owner=pi group=pi mode=777
+  file: path=/srv/www/tmp state=directory owner=pi group=pi mode=777
 
 - name: Set permissions to /usr/share/FruityWifi/squid.inject/poison.pl 
   sudo: True

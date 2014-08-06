@@ -36,7 +36,7 @@
   sudo: True
   file: path={{ item }} owner=pi group=pi recurse=yes state=directory
   with_items: 
-  - /var/www
+  - /srv/www
   - /var/log/lighttpd
   - /var/cache/lighttpd
   - /run/lighttpd

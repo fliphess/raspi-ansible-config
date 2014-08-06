@@ -1,7 +1,7 @@
 - name: set timezone
   sudo: True
-  shell: echo "Europe/Amsterdam\n" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
-
+  lineinfile: dest=/etc/timezone state=present regexp='^\/' line='Europe/Amsterdam'
+  
 - name: activate new timezone
   sudo: True
   command: /usr/sbin/dpkg-reconfigure -f noninteractive tzdata

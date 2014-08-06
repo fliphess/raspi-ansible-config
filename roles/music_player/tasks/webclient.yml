@@ -1,0 +1,26 @@
+---
+- name: get webclient
+  sudo: true
+  git: repo=git@github.com:woutervanwijk/Mopidy-Webclient.git dest=/tmp/webclient update=yes accept_hostkey=yes force=yes
+
+- name: move webclient in place
+  sudo: true
+  command: mv /tmp/webclient/webclient /srv/www/
+
+- name: create group musicbox
+  sudo: true
+  group: name=musicbox state=present
+
+- name: create user musicbox
+  sudo: true
+  user: name=musicbox comment="Musicbox" uid=1040 group=musicbox createhome=yes password=$6$rounds=100000$A8l9DNml7wKozhl1$Ok6fvTP5YQ7IftMuGaLMXLWKYmCGos5PrMFJSSVBIi39cHYNcP7U3Fn8.07HK2ZSTP7ZaUqIEE0OpSEM1f9In1 state=present
+
+- name: create dirs
+  sudo: true
+  file: path={{ item }} owner=musicbox group=musicbox state=directory mode=777
+  with_items:
+    - /home/musicbox/.config/mopidy
+    - /home/musicbox/.cache/mopidy
+    - /home/musicbox/.local/share/mopidy
+    - /music 
+    - /music/local
