@@ -85,10 +85,9 @@ Rickroll:
 Wifi card:
   - http://www.t3node.com/blog/sempre-wireless-usb-stick-wu300-2-on-raspberry-pi/
 
-
 http://blog.tkjelectronics.dk/2013/06/how-to-stream-video-and-audio-from-a-raspberry-pi-with-no-latency/
 https://github.com/raspberrypilearning/parent-detector/blob/master/pirCamera.py
-
-
 https://github.com/woutervanwijk/Pi-MusicBox/blob/master/Create%20Pi%20MusicBox.rst
 https://github.com/woutervanwijk/Mopidy-MusicBox-Webclient/tree/master/webclient
+http://www.boynux.com/raspberry-pi-vpn-server/
+http://www.whaleblubber.ca/boot-raspberry-pi-nfs/
