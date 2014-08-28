@@ -1,0 +1,61 @@
+---
+- name: install packages
+  sudo: True
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+  - build-essential
+  - libssl-dev
+  - libcrypt-openssl-rsa-perl
+  - libao-dev
+  - libio-socket-inet6-perl
+  - libwww-perl
+  - avahi-utils
+  - pkg-config
+  - chkconfig
+  - libssl-dev
+  - libavahi-client-dev
+  - libasound2-dev
+  - pcregrep
+  - logrotate
+  - alsa-utils
+  - python-cherrypy3
+  - python-ws4py
+  - python-spotify
+  - gstreamer0.10-alsa
+  - gstreamer0.10-fluendo-mp3
+  - gstreamer0.10-tools
+  - samba
+  - dos2unix
+  - avahi-utils
+  - alsa-base
+  - python-pylast
+  - cifs-utils
+  - avahi-autoipd
+  - libnss-mdns
+  - ntpdate
+  - ca-certificates
+  - ncmpcpp
+  - alsa-firmware-loaders
+  - firmware-linux
+  - firmware-linux-nonfree
+  - firmware-realtek
+  - linux-wlan-ng-firmware
+  - alsa-firmware-loaders
+  - libcrypt-openssl-rsa-perl
+  - libio-socket-inet6-perl
+  - libwww-perl
+  - libssl-dev
+  - libao-dev
+
+- name: Install pips
+  sudo: True
+  pip: name={{ item }}
+  with_items:
+    - gmusicapi
+    - mopidy-spotify
+    - mopidy-scrobbler
+    - mopidy-soundcloud
+    - mopidy-dirble
+    - mopidy-gmusic
+    - mopidy-subsonic
+    - Mopidy-Local-Whoosh

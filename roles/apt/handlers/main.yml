@@ -1,0 +1,4 @@
+---
+- name: apt-get-update
+  sudo: True
+  shell: apt-get update

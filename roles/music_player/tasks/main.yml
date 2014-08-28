@@ -1,4 +1,122 @@
 ---
-#- include: airtunes.yml
-- include: pi_music_box.yml
-- include: webclient.yml
+- name: get pi music box 
+  sudo: true
+  git: repo=https://github.com/woutervanwijk/Pi-MusicBox.git dest=/tmp/musicbox update=yes accept_hostkey=yes force=yes
+
+- name: sync time
+  sudo: true
+  shell: service ntp stop; ntpdate -u ntp.ubuntu.com ; service ntp start
+
+- name: create config boot dir
+  sudo: true
+  file: path=/boot/config state=directory owner=root group=root
+
+- name: move config file 
+  sudo: true
+  command: bash -c "cp /tmp/musicbox/filechanges/boot/config/* /boot/config/"
+
+- name: put mopidy config in place
+  sudo: true
+  command: bash -c "cp -Rv /tmp/musicbox/filechanges/etc/* /etc/"
+
+- name: move opt files
+  sudo: true
+  command: bash -c "cp -Rv /tmp/musicbox/filechanges/opt/* /opt"
+
+- name: copy avahi config
+  sudo: true
+  command: bash -c "cp -Rv /tmp/musicbox/filechanges/etc/avahi/services/* /etc/avahi/services/"
+
+- name: install mopidy key
+  sudo: true
+  shell: wget -q -O - http://apt.mopidy.com/mopidy.gpg | sudo apt-key add -
+
+- name: set mopidy sources
+  sudo: true
+  shell: wget -q -O /etc/apt/sources.list.d/mopidy.list http://apt.mopidy.com/mopidy.list
+
+- include: packages.yml
+
+- name: put perl libs install script in place
+  sudo: True
+  copy: src=install-perl-spd.sh dest=/root/bin/install-perl-spd.sh mode=755 owner=root group=root
+
+- name: put build shairport install script in place
+  sudo: True
+  copy: src=install-shairport.sh dest=/root/bin/install-shairport.sh mode=755 owner=root group=root
+
+- name: Install perl libs
+  sudo: True
+  shell: /root/bin/install-perl-spd.sh
+
+- name: Install shairport
+  sudo: True
+  shell: /root/bin/install-shairport.sh
+
+- name: get webclient
+  sudo: true
+  git: repo=https://github.com/woutervanwijk/Mopidy-Webclient.git dest=/tmp/web update=yes accept_hostkey=yes force=yes
+
+- name: move webclient in place
+  sudo: true
+  command: mv /tmp/web/webclient /opt/
+
+- name: create symlink
+  sudo: true
+  file: src=/opt/webclient dest=/opt/defaultwebclient state=link
+
+- name: create symlink
+  sudo: true
+  file: src=/opt/webclient dest=/srv/www/webclient state=link
+
+- name: create group musicbox
+  sudo: true
+  group: name=musicbox state=present
+
+- name: create user musicbox
+  sudo: true
+  user: name=musicbox comment="Musicbox" uid=1040 group=musicbox createhome=yes password=$6$rounds=100000$A8l9DNml7wKozhl1$Ok6fvTP5YQ7IftMuGaLMXLWKYmCGos5PrMFJSSVBIi39cHYNcP7U3Fn8.07HK2ZSTP7ZaUqIEE0OpSEM1f9In1 state=present
+
+- name: create dirs
+  sudo: true
+  file: path={{ item }} owner=musicbox group=musicbox state=directory mode=777
+  with_items:
+    - /home/musicbox/.config/mopidy
+    - /home/musicbox/.local/share/mopidy
+    - /home/musicbox/.cache/mopidy
+    - /music 
+    - /music/local
+    - /var/lib/mopidy/.config/mopidy
+
+- name: remove fucking windows carriage return
+  sudo: true
+  shell: dos2unix /boot/config/settings.ini
+
+- name: create symlinks
+  sudo: true
+  file: src=/boot/config/settings.ini dest=/home/musicbox/.config/mopidy/mopidy.conf state=link owner=musicbox group=musicbox
+
+- name: create another link
+  sudo: true
+  file: src=/boot/config/settings.ini dest=/var/lib/mopidy/.config/mopidy/mopidy.conf owner=musicbox group=musicbox state=link
+ 
+- name: turn on ipv6
+  sudo: true
+  shell: sudo modprobe ipv6
+
+- name: enable ip6 in modules
+  sudo: true
+  shell: echo ipv6 | sudo tee -a /etc/modules
+
+- name: enable analog sound 
+  sudo: true
+  shell: sudo amixer cset numid=3 1
+
+- name: tune asound 
+  sudo: true
+  copy: src=asound.conf dest=/etc/asound.conf owner=root group=root
+
+
+
+sudoers:
+mopidy ALL=NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff, /sbin/shutdown

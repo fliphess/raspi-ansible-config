@@ -1,13 +1,25 @@
 ---
-- name: Update package cache 
-  sudo: True
-  shell: apt-get update
-
 - name: get python-apt
   sudo: True
   shell: DEBIAN_FRONTEND=noninteractive apt-get -y install python-apt; touch /root/.python-apt-done
     creates=/root/.python-apt-done
 
-- name: dont install recommends 
-  sudo: True
-  shell: echo 'APT::Install-Recommends "0";nAPT::Install-Suggests "0";' > /etc/apt/apt.conf
+- name: Don't install recommends
+  sudo: true
+  lineinfile: dest=/etc/apt/apt.conf line='APT::Install-Recommends "0";' create=yes
+  notify: apt-get-update
+
+- name: Don't install suggests
+  sudo: true
+  lineinfile: dest=/etc/apt/apt.conf line='APT::Install-Suggests "0";'
+  notify: apt-get-update
+
+- name: add rpi repo
+  sudo: true
+  apt_repository: repo='deb http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi' state=present
+  notify: apt-get-update
+
+- name: add rpi sources
+  sudo: true
+  apt_repository: repo='deb-src http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi' state=present
+  notify: apt-get-update

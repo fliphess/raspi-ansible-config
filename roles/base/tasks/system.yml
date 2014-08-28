@@ -1,35 +1,41 @@
 - name: update firmware
-  sudo: True
+  sudo: true
   shell: rpi-update
 
 - name: put interfaces file in place
-  sudo: True
+  sudo: true
   copy: src=etc/network/interfaces dest=/etc/network/interfaces owner=root group=root
 
 - name: bootscripts
-  sudo: True
+  sudo: true
   copy: src=etc/rc.local dest=/etc/rc.local owner=root group=root
   
 - name: configure ssh
-  sudo: True
+  sudo: true
   shell: update-rc.d ssh enable && invoke-rc.d ssh start
   
 - name: put motd in place
-  sudo: True
+  sudo: true
   copy: src=etc/motd dest=/etc/motd mode=644 group=root owner=root
 
 - name: create bin dir in root
-  sudo: True
+  sudo: true
   file: path=/root/bin state=directory
 
 - name: Remove sudo group rights
+  sudo: true
   action: lineinfile dest=/etc/sudoers regexp="^%sudo" state=absent
 
-- name: also make sure ssh-agent works via sudo
-  lineinfile: dest=/etc/sudoers state=present regexp='^Defaults env_keep\+\=SSH_AUTH_SOCK' line='Defaults env_keep+=SSH_AUTH_SOCK'
+- name: Set ssh auth sudo rights 
+  sudo: true
+  action: 'lineinfile dest=/etc/sudoers.d/ssh line="Defaults env_keep+=SSH_AUTH_SOCK" create=yes'
+
+- name: set sudo rights
+  sudo: true
+  action: 'lineinfile dest=/etc/sudoers.d/pi line="pi      ALL=NOPASSWD: ALL" create=yes'
 
 - name: Turn on ssh at boot time
-  sudo: True
+  sudo: true
   shell: update-rc.d {{ item }} defaults
   with_items:
   - ssh

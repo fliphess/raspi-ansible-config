@@ -1,0 +1,4 @@
+---
+- name: reload-sysctl
+  sudo: true
+  command:  /sbin/sysctl -p

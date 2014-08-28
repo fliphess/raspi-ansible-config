@@ -15,10 +15,12 @@
   sudo: true
   lineinfile: dest=/etc/default/rcS line="RAMLOCK=yes"
 
-- name: disable ipv6
-  sudo: True
-  shell: echo "net.ipv6.conf.all.disable_ipv6 = 1" > /etc/sysctl.d/ipv6.conf && /sbin/sysctl -p creates=/etc/sysctl.d/ipv6.conf
+- name: set swappiness
+  sudo: true
+  sysctl: name=vm.swappiness value=0 state=present sysctl_file=/etc/sysctl.d/raspbian.conf reload=no
+  notify: reload-sysctl
 
-- name: turn off swap
-  sudo: True
-  shell: echo "vm.swappiness = 0" > /etc/sysctl.d/swap.conf && /sbin/sysctl -p creates=/etc/sysctl.d/swap.conf
+- name: set vm.min_free
+  sudo: true
+  sysctl: name=vm.min_free_kbytes value=32768 state=present sysctl_file=/etc/sysctl.d/raspbian.conf reload=no
+  notify: reload-sysctl
