@@ -3,6 +3,13 @@
   sudo: true
   git: repo=https://github.com/woutervanwijk/Pi-MusicBox.git dest=/tmp/musicbox update=yes accept_hostkey=yes force=yes
 
+- name: remove files 
+  sudo: true
+  file: state=absent path=/tmp/musicbox/filechanges/{{ item }}
+  with_items:
+    - etc/sudoers
+    - boot/cmdline.txt
+
 - name: sync time
   sudo: true
   shell: service ntp stop; ntpdate -u ntp.ubuntu.com ; service ntp start
@@ -115,8 +122,3 @@
 - name: tune asound 
   sudo: true
   copy: src=asound.conf dest=/etc/asound.conf owner=root group=root
-
-
-
-sudoers:
-mopidy ALL=NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff, /sbin/shutdown
