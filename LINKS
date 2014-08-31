@@ -33,12 +33,17 @@ IKEA:
 
 https://gist.github.com/phred
 https://github.com/phred
+
 #######################################################################
 ## Mpd spotify
 #######################################################################
 
 Spotify: 
   - https://github.com/woutervanwijk/Pi-MusicBox
+
+Music box:
+  - https://github.com/woutervanwijk/Pi-MusicBox/blob/master/Create%20Pi%20MusicBox.rst
+  - https://github.com/woutervanwijk/Mopidy-MusicBox-Webclient/tree/master/webclient
 
 #######################################################################
 ##  Build raspian yourself
@@ -85,9 +90,41 @@ Rickroll:
 Wifi card:
   - http://www.t3node.com/blog/sempre-wireless-usb-stick-wu300-2-on-raspberry-pi/
 
+#######################################################################
+## Streaming
+#######################################################################
+
 http://blog.tkjelectronics.dk/2013/06/how-to-stream-video-and-audio-from-a-raspberry-pi-with-no-latency/
-https://github.com/raspberrypilearning/parent-detector/blob/master/pirCamera.py
-https://github.com/woutervanwijk/Pi-MusicBox/blob/master/Create%20Pi%20MusicBox.rst
-https://github.com/woutervanwijk/Mopidy-MusicBox-Webclient/tree/master/webclient
-http://www.boynux.com/raspberry-pi-vpn-server/
+
+#######################################################################
+## NFS USERLAND
+#######################################################################
+
 http://www.whaleblubber.ca/boot-raspberry-pi-nfs/
+
+#######################################################################
+## OLA 
+#######################################################################
+
+http://www.opendmx.net/index.php/Building_a_Custom_Raspbian_Image
+
+
+http://www.enttec.com/index.php?main_menu=Products&prod=70304&show=firmware
+
+http://www.enttec.com/index.php?main_menu=Products&prod=70304&show=downloads
+
+
+
+
+https://github.com/OpenLightingProject/raspberrypi
+
+#######################################################################
+##
+#######################################################################
+
+https://github.com/raspberrypilearning/parent-detector/blob/master/pirCamera.py
+http://www.boynux.com/raspberry-pi-vpn-server/
+
+
+https://raymii.org/s/articles/Build_a_35_dollar_Time_Capsule_-_Raspberry_Pi_Time_Machine.html
+
